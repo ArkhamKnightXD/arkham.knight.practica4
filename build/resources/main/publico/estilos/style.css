@@ -1,0 +1,65 @@
+body {
+    margin: 0;
+}
+
+.boxed-shadow {
+    box-shadow: 3px 3px 3px rgba(34, 34, 34, 0.12);
+}
+
+.text-shadow {
+    text-shadow: 3px 3px 3px rgba(34, 34, 34, 0.12);
+}
+
+.nombre-usuario {
+    border-right: 1px solid rgb(0, 0, 0);
+}
+
+.btn {
+    border-radius: 0 !important;
+}
+
+.card {
+    border: 3px black solid !important;
+    border-radius: 0 !important;
+}
+
+.cuerpo-corto::after {
+    content: "...";
+}
+
+.container-buscar {
+    background: #F2F2F2;
+    border-radius: 10px;
+    color: #999;
+    width: 40rem;
+}
+
+.container-buscar > input {
+    background: transparent;
+    border: 0;
+    width: 95%;
+}
+
+.login {
+    box-shadow: -3px 3px 3px rgba(34, 34, 34, 0.12);
+}
+
+.panel {
+    border: 3px solid rgb(0, 0, 0) !important;
+    text-align: center;
+}
+
+.upbottom-letters {
+    writing-mode: vertical-rl;
+    text-orientation: upright;
+}
+
+.no-encontrado {
+    height: 100% !important;
+    width: 100% !important;;
+}
+
+.nav-item {
+    position: relative;
+    left:100px;
+}
