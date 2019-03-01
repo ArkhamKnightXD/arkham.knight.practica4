@@ -1,6 +1,12 @@
 package arkham.knight.practica4.encapsulacion;
 
-public class Comentario {
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+public class Comentario implements Serializable {
+
+    @Id
     private long id;
     private String comentario;
     private Usuario autor;

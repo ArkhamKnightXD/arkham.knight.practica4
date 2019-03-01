@@ -4,9 +4,13 @@ package arkham.knight.practica4.encapsulacion;
 import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
+import javax.persistence.*;
+import java.io.Serializable;
 
-public class Articulo {
+@Entity
+public class Articulo implements Serializable {
 
+    @Id
     private long id;
     private String titulo;
     private String cuerpo;

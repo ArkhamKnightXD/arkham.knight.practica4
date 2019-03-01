@@ -1,6 +1,12 @@
 package arkham.knight.practica4.encapsulacion;
 
-public class Usuario {
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+public class Usuario implements Serializable {
+
+    @Id
     private long id;
     private String username;
     private String password;

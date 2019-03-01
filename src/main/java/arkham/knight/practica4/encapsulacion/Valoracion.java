@@ -1,4 +1,11 @@
 package arkham.knight.practica4.encapsulacion;
 
-public class Valoracion {
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+public class Valoracion implements Serializable {
+
+    @Id
+    private long id;
 }

@@ -1,6 +1,12 @@
 package arkham.knight.practica4.encapsulacion;
 
-public class Etiqueta {
+import javax.persistence.*;
+import java.io.Serializable;
+
+@Entity
+public class Etiqueta implements Serializable {
+
+    @Id
     private long id;
     private String etiqueta;
 
