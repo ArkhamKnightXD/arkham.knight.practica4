@@ -1,6 +1,6 @@
-package arkham.knight.practica3.path;
+package arkham.knight.practica4.path;
 
-import arkham.knight.practica3.Main;
+import arkham.knight.practica4.Main;
 import freemarker.template.Configuration;
 import freemarker.template.Template;
 import freemarker.template.Version;
@@ -12,15 +12,15 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Map;
 
-import arkham.knight.practica3.encapsulacion.Comentario;
-import arkham.knight.practica3.encapsulacion.Etiqueta;
-import arkham.knight.practica3.encapsulacion.Usuario;
-import arkham.knight.practica3.encapsulacion.Articulo;
-import arkham.knight.practica3.service.ArticuloService;
-import arkham.knight.practica3.service.ComentarioService;
-import arkham.knight.practica3.service.EtiquetaService;
-import arkham.knight.practica3.service.UsuarioService;
-import arkham.knight.practica3.service.BootStrapService;
+import arkham.knight.practica4.encapsulacion.Comentario;
+import arkham.knight.practica4.encapsulacion.Etiqueta;
+import arkham.knight.practica4.encapsulacion.Usuario;
+import arkham.knight.practica4.encapsulacion.Articulo;
+import arkham.knight.practica4.service.ArticuloService;
+import arkham.knight.practica4.service.ComentarioService;
+import arkham.knight.practica4.service.EtiquetaService;
+import arkham.knight.practica4.service.UsuarioService;
+import arkham.knight.practica4.service.BootStrapService;
 import static spark.Spark.*;
 import static spark.Spark.notFound;
 

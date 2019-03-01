@@ -1,6 +1,6 @@
-package arkham.knight.practica3.service;
+package arkham.knight.practica4.service;
 
-import arkham.knight.practica3.encapsulacion.Usuario;
+import arkham.knight.practica4.encapsulacion.Usuario;
 import java.sql.*;
 
 public class UsuarioService {

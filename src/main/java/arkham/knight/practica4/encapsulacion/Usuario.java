@@ -1,4 +1,4 @@
-package arkham.knight.practica3.encapsulacion;
+package arkham.knight.practica4.encapsulacion;
 
 public class Usuario {
     private long id;

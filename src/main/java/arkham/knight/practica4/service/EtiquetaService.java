@@ -1,10 +1,10 @@
-package arkham.knight.practica3.service;
+package arkham.knight.practica4.service;
 
 import java.sql.Connection;
 import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
-import arkham.knight.practica3.encapsulacion.Etiqueta;
+import arkham.knight.practica4.encapsulacion.Etiqueta;
 
 public class EtiquetaService {
 

@@ -1,8 +1,8 @@
-package arkham.knight.practica3.service;
+package arkham.knight.practica4.service;
 
-import arkham.knight.practica3.encapsulacion.Articulo;
-import arkham.knight.practica3.encapsulacion.Comentario;
-import arkham.knight.practica3.encapsulacion.Etiqueta;
+import arkham.knight.practica4.encapsulacion.Articulo;
+import arkham.knight.practica4.encapsulacion.Comentario;
+import arkham.knight.practica4.encapsulacion.Etiqueta;
 import java.sql.*;
 import java.time.LocalDate;
 import java.util.ArrayList;
