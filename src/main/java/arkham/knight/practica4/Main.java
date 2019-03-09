@@ -1,4 +1,5 @@
 package arkham.knight.practica4;
+import arkham.knight.practica4.encapsulacion.Usuario;
 import arkham.knight.practica4.path.Ruta;
 import arkham.knight.practica4.service.BootStrapService;
 import arkham.knight.practica4.service.DataBaseService;
@@ -14,7 +15,7 @@ public class Main {
         }
 
         // Insertando el usuario por defecto (administrador).
-        if (ServicioUsuario.getInstancia().encontrar(new Long(1)) == null) {
+        if (UsuarioService.getInstancia().find(new Long(1)) == null) {
             UsuarioService.getInstancia().crear(new Usuario(new Long(1), "Administrador", "admin", "1234", true, true, null));
         }
 

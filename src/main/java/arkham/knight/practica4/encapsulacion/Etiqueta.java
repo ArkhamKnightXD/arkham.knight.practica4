@@ -1,6 +1,5 @@
 package arkham.knight.practica4.encapsulacion;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -8,24 +7,22 @@ import javax.persistence.Id;
 
 @Entity
 public class Etiqueta implements Serializable {
-
     @Id
     @GeneratedValue
     private long id;
     private String etiqueta;
 
+    public Etiqueta() {
+
+    }
+
+    public Etiqueta(String etiqueta) {
+        this.etiqueta = etiqueta;
+    }
 
     public Etiqueta(long id, String etiqueta) {
         this.id = id;
         this.etiqueta = etiqueta;
-    }
-
-    public Etiqueta() {
-    }
-
-    @Override
-    public String toString() {
-        return super.toString();
     }
 
     public long getId() {
@@ -43,5 +40,4 @@ public class Etiqueta implements Serializable {
     public void setEtiqueta(String etiqueta) {
         this.etiqueta = etiqueta;
     }
-
 }

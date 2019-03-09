@@ -1,81 +1,62 @@
 package arkham.knight.practica4.service;
 
-import java.sql.Connection;
-import java.sql.ResultSet;
-import java.sql.Statement;
-import java.util.ArrayList;
+import java.util.List;
+import java.util.Set;
+
 import arkham.knight.practica4.encapsulacion.Etiqueta;
 
-public class EtiquetaService {
+public class EtiquetaService extends DataBaseService<Etiqueta> {
+    private static EtiquetaService instancia;
 
+    private EtiquetaService() {
+        super(Etiqueta.class);
+    }
 
-    public static ArrayList<Etiqueta> conseguirEtiquetas(Long idArticulo) {
-        ArrayList<Etiqueta> etiquetas = new ArrayList<Etiqueta>();
-        try {
-            DataBaseService dataBaseService = new DataBaseService();
-            Connection conexion = dataBaseService.getConexion();
-            Statement statement = conexion.createStatement();
+    public static EtiquetaService getInstancia() {
+        if (instancia == null) {
+            instancia = new EtiquetaService();
+        }
+        return instancia;
+    }
 
-            for (Long id : conseguirIDEtiquetas(idArticulo)) {
-                ResultSet resultado = statement.executeQuery("select * from etiquetas where id = " + id + ";");
-
-                while (resultado.next()) {
-                    etiquetas.add(new Etiqueta(resultado.getLong("id"), resultado.getString("etiqueta")));
+    public static void agregarEtiquetas(String[] etiquetas, Set<Etiqueta> etiquetasSet) {
+        List<Etiqueta> tags = EtiquetaService.getInstancia().findAll();
+        for (int i = 0; i < etiquetas.length; i++) {
+            Etiqueta et = new Etiqueta(etiquetas[i]);
+            boolean esta = false;
+            for (Etiqueta e : tags) {
+                if (e.getEtiqueta().contains(etiquetas[i])) {
+                    esta = true;
                 }
             }
 
-            statement.close();
-            conexion.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+            if (!esta) {
+                EtiquetaService.getInstancia().crear(et);
+                tags = EtiquetaService.getInstancia().findAll();
+            }
         }
-        return etiquetas;
+
+        for (int i = 0; i < etiquetas.length; i++) {
+            for (Etiqueta e : EtiquetaService.getInstancia().findAll()) {
+                if (e.getEtiqueta().equals(etiquetas[i])) {
+                    etiquetasSet.add(e);
+                }
+            }
+        }
     }
 
-    public static ArrayList<Long> conseguirIDEtiquetas(Long idArticulo) {
-        ArrayList<Long> IDetiquetas = new ArrayList<Long>();
-        try {
-            DataBaseService DataBaseService = new DataBaseService();
-            Connection conexion = DataBaseService.getConexion();
-            Statement statement = conexion.createStatement();
+    public static boolean seModificaronLasEtiquetas(Set<Etiqueta> etiquetas, Set<Etiqueta> setEtiquetas) {
 
-            ResultSet resultado = statement.executeQuery("select * from ARTICULOSYETIQUETAS where articulo = " + idArticulo + ";");
-            while (resultado.next()) {
-                IDetiquetas.add(resultado.getLong("etiqueta"));
-            }
-            statement.close();
-            conexion.close();
-        } catch (Exception e) {
-            e.printStackTrace();
+        if ((etiquetas.size() == 0 && setEtiquetas.size() > 0) || (etiquetas.size() > 0 && setEtiquetas.size() == 0)) {
+            return true;
         }
-
-        return IDetiquetas;
-    }
-
-   /*
-        Te permite conseguir el ID de cualquier consulta que se le pase, en el caso de que tenga ID la tabla, que en sí es válido
-        para todas las tablas existentes.
-    */
-
-
-    public static long conseguirID(String consulta) {
-        long idCualquierTabla = -1;
-
-        try {
-            DataBaseService DataBaseService = new DataBaseService();
-            Connection conexion = DataBaseService.getConexion();
-            Statement statement = conexion.createStatement();
-
-            ResultSet rs = statement.executeQuery(consulta);
-            while (rs.next()) {
-                idCualquierTabla = rs.getLong("id");
+        for (Etiqueta etiquetaSet : setEtiquetas) {
+            for (Etiqueta etiqueta : etiquetas) {
+                if (!etiquetaSet.getEtiqueta().contains(etiqueta.getEtiqueta())) {
+                    return true;
+                }
             }
-            statement.close();
-            conexion.close();
-        } catch (Exception e) {
-            e.printStackTrace();
         }
-        return idCualquierTabla;
+        return false;
     }
 }
-

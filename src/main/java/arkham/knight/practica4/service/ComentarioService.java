@@ -1,103 +1,39 @@
 package arkham.knight.practica4.service;
 
-import java.sql.*;
-import java.util.ArrayList;
+import java.util.List;
+
 import arkham.knight.practica4.encapsulacion.Comentario;
 
-public class ComentarioService {
+import javax.persistence.EntityManager;
+import javax.persistence.Query;
 
-    public static ArrayList<Comentario> listarComentarios(long articuloID) {
-        Connection conexion = DataBaseService.getInstancia().getConexion();
-        ArrayList<Comentario> comentarios = new ArrayList<>();
+public class ComentarioService extends DataBaseService<Comentario> {
+    private static ComentarioService instancia;
 
-        try {
-            // Consultando todos los articulos.
-            String comentariosQuery = "SELECT * FROM comentarios WHERE articuloid = " + articuloID + ";";
-
-            // Ejecuta el query pasado por parámetro "usuarioDefecto".
-            Statement statement = conexion.createStatement();
-            ResultSet resultado = statement.executeQuery(comentariosQuery);
-
-            while (resultado.next()) {
-                comentarios.add(
-                        new Comentario(
-                                resultado.getLong("id"),
-                                resultado.getNString("comentario"),
-                                UsuarioService.buscarUsuario(resultado.getLong("autor")),
-                                null
-                        )
-                );
-            }
-
-            statement.close();
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                conexion.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
-        }
-
-        return comentarios;
+    private ComentarioService() {
+        super(Comentario.class);
     }
 
-    public static boolean crearComentario(long id, String comentario, Long autor, Long articuloID) {
-        boolean creadoCorrectamente = false;
-        Connection conexion = DataBaseService.getInstancia().getConexion();
-
-        try {
-            // Crealo si no existe y si existe actualizalo.
-            String comentarioNuevo = "MERGE INTO comentarios \n" +
-                    "KEY(ID) \n" +
-                    "VALUES (" + id + ",'" + comentario + "'," + autor + "," + articuloID + ");";
-
-            // Ejecuta el query pasado por parámetro "usuarioDefecto".
-            PreparedStatement prepareStatement = conexion.prepareStatement(comentarioNuevo);
-
-            // Si se ejecutó el query bien pues la cantidad de filas de la tabla debe ser mayor a 0, pues se ha insertado una fila.
-            int fila = prepareStatement.executeUpdate();
-            creadoCorrectamente = fila > 0;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        } finally {
-            try {
-                conexion.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+    public static ComentarioService getInstancia() {
+        if (instancia == null) {
+            instancia = new ComentarioService();
         }
-
-        return creadoCorrectamente;
+        return instancia;
     }
 
-    public static Long conseguirTamano() {
-        Long ultimoID = new Long(0);
-        Connection conexion = DataBaseService.getInstancia().getConexion();
+    public List<Comentario> encontrarComentario(long articuloID) {
+        EntityManager em = getEntityManager();
 
         try {
-            // Crealo si no existe y si existe actualizalo.
-            String conseguirTamanoTabla = "SELECT TOP 1 * FROM comentarios ORDER BY ID DESC;";
-
-            // Ejecuta el query.
-            PreparedStatement prepareStatement = conexion.prepareStatement(conseguirTamanoTabla);
-            ResultSet resultado = prepareStatement.executeQuery();
-            while (resultado.next()) {
-                ultimoID = resultado.getLong("id");
-            }
-
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+            Query query = em.createQuery(
+                    "from Comentario comentario where comentario.articulo.id = :comentario_articuloID order by id asc"
+            );
+            query.setParameter("comentario_articuloID", articuloID);
+            return query.getResultList();
+        } catch (Exception ex) {
+            return null;
         } finally {
-            try {
-                conexion.close();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+            em.close();
         }
-        return ultimoID;
     }
 }
-
