@@ -5,37 +5,59 @@ import java.io.Serializable;
 
 @Entity
 public class Usuario implements Serializable {
-
     @Id
-    private long id;
+    private Long id;
+    private String nombre;
     private String username;
     private String password;
-    private boolean administrador;
+    private boolean administrator;
     private boolean autor;
-
-    public Usuario(long id, String username, String password, boolean administrador, boolean autor) {
-        this.id = id;
-        this.username = username;
-        this.password = password;
-        this.administrador = administrador;
-        this.autor = autor;
-    }
+    private String sesion;
 
     public Usuario() {
+
     }
 
-    @Override
-    public String toString() {
-        String mensaje="El username del usuario es: "+username;
-        return mensaje;
+    public Usuario(String nombre, String username, String password, boolean administrator, boolean autor, String sesion) {
+        this.nombre = nombre;
+        this.username = username;
+        this.password = password;
+        this.administrator = administrator;
+        this.autor = autor;
+        this.sesion = sesion;
     }
 
+    public Usuario(Long id, String nombre, String username, String password, boolean administrator, boolean autor, String sesion) {
+        this.id = id;
+        this.nombre = nombre;
+        this.username = username;
+        this.password = password;
+        this.administrator = administrator;
+        this.autor = autor;
+        this.sesion = sesion;
+    }
+
+    public String getNombre() {
+        return nombre;
+    }
+
+    public void setNombre(String nombre) {
+        this.nombre = nombre;
+    }
+
+    public boolean isAdministrator() {
+        return administrator;
+    }
+
+    public void setAdministrator(boolean administrator) {
+        this.administrator = administrator;
+    }
 
     public long getId() {
         return id;
     }
 
-    public void setId(long id) {
+    public void setId(Long id) {
         this.id = id;
     }
 
@@ -55,12 +77,12 @@ public class Usuario implements Serializable {
         this.password = password;
     }
 
-    public boolean isAdministrador() {
-        return administrador;
+    public boolean isAdminstrator() {
+        return administrator;
     }
 
-    public void setAdministrador(boolean administrador) {
-        this.administrador = administrador;
+    public void setAdminstrator(boolean adminstrator) {
+        this.administrator = adminstrator;
     }
 
     public boolean isAutor() {
@@ -70,6 +92,4 @@ public class Usuario implements Serializable {
     public void setAutor(boolean autor) {
         this.autor = autor;
     }
-
-
 }

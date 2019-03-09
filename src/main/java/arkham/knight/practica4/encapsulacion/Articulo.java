@@ -1,40 +1,54 @@
 package arkham.knight.practica4.encapsulacion;
 
 
-import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import javax.persistence.*;
 import java.io.Serializable;
+import java.util.Set;
 
 @Entity
 public class Articulo implements Serializable {
-
     @Id
+    @GeneratedValue
     private long id;
+
     private String titulo;
+
+    @Column(name = "cuerpo", columnDefinition = "TEXT")
     private String cuerpo;
-    private Date fecha;
+
+    @OneToOne
     private Usuario autor;
+
+    private Date fecha;
+
+    @OneToMany(mappedBy = "articulo", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
     private List<Comentario> listaComentarios;
-    private List<Etiqueta> listaEtiquetas;
 
-    public Articulo(long id, String titulo, String cuerpo, Usuario autor, Date fecha, ArrayList<Comentario> listaComentarios, ArrayList<Etiqueta> listaEtiquetas) {
-        this.id = id;
-        this.titulo = titulo;
-        this.cuerpo = cuerpo;
-        this.autor = autor;
-        this.fecha = fecha;
-        this.listaComentarios = listaComentarios;
-        this.listaEtiquetas = listaEtiquetas;
+    @ManyToMany(fetch = FetchType.EAGER)
+    private Set<Etiqueta> listaEtiquetas;
+
+    @Transient
+    private String pagina;
+
+    @OneToMany(mappedBy = "articulo", cascade = CascadeType.REMOVE, fetch = FetchType.EAGER)
+    private Set<Voto> votos;
+
+    public String getPagina() {
+        return pagina;
     }
 
-    public Articulo() {
+    public void setPagina(String pagina) {
+        this.pagina = pagina;
     }
 
-    @Override
-    public String toString() {
-        return super.toString();
+    public Set<Voto> getVotos() {
+        return votos;
+    }
+
+    public void setVotos(Set<Voto> votos) {
+        this.votos = votos;
     }
 
     public long getId() {
@@ -61,20 +75,20 @@ public class Articulo implements Serializable {
         this.cuerpo = cuerpo;
     }
 
-    public Date getFecha() {
-        return fecha;
-    }
-
-    public void setFecha(Date fecha) {
-        this.fecha = fecha;
-    }
-
     public Usuario getAutor() {
         return autor;
     }
 
     public void setAutor(Usuario autor) {
         this.autor = autor;
+    }
+
+    public Date getFecha() {
+        return fecha;
+    }
+
+    public void setFecha(Date fecha) {
+        this.fecha = fecha;
     }
 
     public List<Comentario> getListaComentarios() {
@@ -85,20 +99,19 @@ public class Articulo implements Serializable {
         this.listaComentarios = listaComentarios;
     }
 
-    public List<Etiqueta> getListaEtiquetas() {
+    public Set<Etiqueta> getListaEtiquetas() {
         return listaEtiquetas;
     }
 
-    public void setListaEtiquetas(List<Etiqueta> listaEtiquetas) {
+    public void setListaEtiquetas(Set<Etiqueta> listaEtiquetas) {
         this.listaEtiquetas = listaEtiquetas;
     }
-
 
     public String getCuerpoCorto() {
         String cuerpoCorto = "";
 
-        for(int i = 0; i < 70; i++) {
-            if(i >= this.getCuerpo().length())
+        for (int i = 0; i < 70; i++) {
+            if (i >= this.getCuerpo().length())
                 break;
 
             cuerpoCorto += this.getCuerpo().charAt(i);
@@ -107,4 +120,18 @@ public class Articulo implements Serializable {
         return cuerpoCorto;
     }
 
+    public Articulo() {
+
+    }
+
+    public Articulo(String titulo, String cuerpo, Usuario autor, Date fecha, List<Comentario> listaComentarios, Set<Etiqueta> listaEtiquetas, String pagina, Set<Voto> votos) {
+        this.titulo = titulo;
+        this.cuerpo = cuerpo;
+        this.autor = autor;
+        this.fecha = fecha;
+        this.listaComentarios = listaComentarios;
+        this.listaEtiquetas = listaEtiquetas;
+        this.pagina = pagina;
+        this.votos = votos;
+    }
 }
