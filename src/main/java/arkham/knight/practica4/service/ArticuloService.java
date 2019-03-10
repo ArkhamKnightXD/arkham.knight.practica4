@@ -1,14 +1,10 @@
 package arkham.knight.practica4.service;
 
 import arkham.knight.practica4.encapsulacion.Articulo;
-import arkham.knight.practica4.encapsulacion.Comentario;
-import arkham.knight.practica4.encapsulacion.Etiqueta;
+
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.sql.*;
-import java.time.LocalDate;
-import java.util.ArrayList;
 import java.util.List;
 
 

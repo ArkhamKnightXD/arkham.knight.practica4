@@ -4,7 +4,6 @@ import arkham.knight.practica4.encapsulacion.Usuario;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Query;
-import java.sql.*;
 
 public class UsuarioService extends DataBaseService<Usuario>{
     private static UsuarioService instancia;

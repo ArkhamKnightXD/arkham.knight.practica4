@@ -9,11 +9,9 @@ import freemarker.template.Version;
 import org.jasypt.util.text.StrongTextEncryptor;
 import spark.Session;
 import java.io.StringWriter;
-import java.time.LocalDate;
 import java.util.*;
 
 import static spark.Spark.*;
-import static spark.Spark.notFound;
 
 public class Ruta {
 
@@ -550,49 +548,7 @@ public class Ruta {
             });
         });
 
-        get("/etiqueta/:id", (req, res) -> {
-            StringWriter writer = new StringWriter();
-            Map<String, Object> atributos = new HashMap<>();
-            Template template = configuration.getTemplate("plantillas/articulos-por-etiqueta.ftl");
 
-            Etiqueta etiquetaSeleccionada = EtiquetaService.getInstancia().find(Long.parseLong(req.params("id")));
-
-            Set<Articulo> articulos = new HashSet<>();
-
-            for (Articulo art : ArticuloService.getInstancia().findAll()) {
-                for (Etiqueta eti : art.getListaEtiquetas()) {
-                    if (eti.getId() == etiquetaSeleccionada.getId()) {
-                        articulos.add(art);
-                    }
-                }
-            }
-
-            atributos.put("etiquetaSeleccionada", etiquetaSeleccionada);
-            atributos.put("articulos", articulos);
-            atributos.put("estaLogueado", req.session().attribute("sesionUsuario") != null);
-            atributos.put("nombreUsuario", nombreUsuario);
-            atributos.put("tienePermisos", usuario.isAdminstrator() || usuario.isAutor());
-            atributos.put("esAdmin", usuario.isAdminstrator());
-            template.process(atributos, writer);
-
-            return writer;
-        });
-
-        notFound((req, res) -> {
-            StringWriter writer = new StringWriter();
-            Template template = configuration.getTemplate("plantillas/404.ftl");
-            Map<String, Object> atributos = new HashMap<>();
-            atributos.put("estaLogueado", req.session().attribute("sesionUsuario") != null);
-            atributos.put("nombreUsuario", nombreUsuario);
-            atributos.put("tienePermisos", usuario.isAdminstrator() || usuario.isAutor());
-            atributos.put("esAdmin", usuario.isAdminstrator());
-
-            template.process(atributos, writer);
-            res.status(404);
-            res.body(writer.toString());
-
-            return writer;
-        });
     }
 
     private static Usuario restaurarSesion(String cookie) {
