@@ -48,14 +48,14 @@
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="voto" value="Me encanta">
                             <label class="form-check-label" for="me-encanta">
-                                <i class="fas fa-smile fa-2x" style="color: deeppink" title="Me encanta"></i>
+                                <i class="fas fa-smile fa-2x" style="color: yellow" title="Me encanta"></i>
                                 <span class="badge badge-secondary">${votosMeEncanta}</span>
                             </label>
                         </div>
                         <div class="form-check form-check-inline">
                             <input class="form-check-input" type="radio" name="voto" value="Meh">
                             <label class="form-check-label" for="meh">
-                                <i class="fas fa-meh fa-2x" style="color: darkorange" title="Meh"></i>
+                                <i class="fas fa-meh fa-2x" style="color: yellow" title="Meh"></i>
                                 <span class="badge badge-secondary">${votosMeh}</span>
                             </label>
                         </div>
@@ -73,10 +73,10 @@
                                 <span class="badge badge-secondary">${votosMeIndigna}</span>
                             </label>
                         </div>
-                        <button type="submit" class="btn btn-outline-dark">Reaccionar</button>
+                        <button type="submit" class="btn btn-outline-light">Reaccionar</button>
                         <br><br>
                         <#if votoActual??>
-                            <p class="mb-0"><strong>Has votado por:</strong> ${votoActual.voto}.</p>
+                            <p class="mb-0"><strong>Haz reaccionado con un:</strong> ${votoActual.voto}.</p>
                         <#else>
                             <strong>No olvides dejar tu voto.</strong>
                         </#if>
@@ -91,14 +91,14 @@
                                 <label for="comentario"><strong>Comentario</strong></label>
                                 <textarea name="comentario" class="form-control rounded-0"></textarea>
                             </div>
-                            <button class="btn btn-outline-primary btn-block mt-3" type="submit">
+                            <button class="btn btn-outline-light btn-block mt-3" type="submit">
                                 COMENTAR
                             </button>
                         </form>
                     </div>
                     <div class="row">
                         <h5 class="col-12 pt-3">
-                            <i class="fas fa-comments text-light">COMENTARIOS</i> 
+                            <i class="fas fa-comments text-light">COMENTARIOS</i>
                             <hr noshade>
                         </h5>
                         <#list articulo.listaComentarios as comentario>
@@ -128,7 +128,7 @@
                                             <input class="form-check-input" type="radio" name="valoracion"
                                                    value="Me encanta">
                                             <label class="form-check-label" for="me-encanta">
-                                                <i class="fas fa-smile fa-2x" style="color: deeppink"
+                                                <i class="fas fa-smile fa-2x" style="color: darkorange"
                                                    title="Me encanta"></i>
                                                 <span class="badge badge-secondary">${comentario.cantidadMeEncanta}</span>
                                             </label>
@@ -157,7 +157,7 @@
                                                 <span class="badge badge-secondary">${comentario.cantidadMeIndigna}</span>
                                             </label>
                                         </div>
-                                        <button type="submit" class="btn btn-outline-dark">Reaccionar</button>
+                                        <button type="submit" class="btn btn-outline-primary">Reaccionar</button>
                                     </form>
                                 </div>
                             </div>
