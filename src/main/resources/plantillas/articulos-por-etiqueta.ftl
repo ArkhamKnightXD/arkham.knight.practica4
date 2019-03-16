@@ -15,14 +15,14 @@
                     <div class="card-body">
                         <h5 class="card-title">${articulo.titulo}</h5>
                         <p class="card-text text-muted m-0 cuerpo-corto">${articulo.cuerpoCorto}</p>
-                        <a href="/articulo/${articulo.id}" class="text-danger float-right"><strong>Leer más...</strong></a>
+                        <a href="/articulo/${articulo.id}" class="text-primary float-right"><strong>Ver mas</strong></a>
                     </div>
-                    <div class="card-footer p-2">
+                    <div class="card-footer p-2 bg-dark">
                         <strong class="text-danger m-0">
-                            <span class="text-warning">
+                            <span class="text-primary">
                                 <i class="fas fa-calendar-alt"></i> ${articulo.fecha}
                             </span>
-                            <span class="text-success ml-5">
+                            <span class="text-light ml-5">
                                 <i class="fas fa-comments"></i> ${articulo.listaComentarios?size}
                             </span>
                             <#if articulo.listaEtiquetas?size gt 0>

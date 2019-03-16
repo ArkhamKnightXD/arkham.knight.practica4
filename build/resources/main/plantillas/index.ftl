@@ -22,7 +22,7 @@
                                 <span class="text-primary ml-5">
                                     <i class="fas fa-hashtag"></i>
                                     <#list articulo.listaEtiquetas as etiqueta>
-                                        ${etiqueta.etiqueta}
+                                        <a href="/etiqueta/${etiqueta.id}">${etiqueta.etiqueta}</a>
                                     </#list>
                                 </span>
                             </#if>
@@ -33,4 +33,42 @@
         </#list>
     </div>
 </div>
+    <div class="col">
+        <div class="row">
+            <nav>
+                <ul class="pagination">
+                    <#if paginaActual gt 1>
+                        <li class="page-item">
+                            <a class="page-link" href="/inicio/${paginaActual - 1}" aria-label="Anterior">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Anterior</span>
+                            </a>
+                        </li>
+                    <#else>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="/inicio/${paginaActual - 1}" aria-label="Anterior">
+                                <span aria-hidden="true">&laquo;</span>
+                                <span class="sr-only">Anterior</span>
+                            </a>
+                        </li>
+                    </#if>
+                    <#if paginaMaxima gt paginaActual>
+                        <li class="page-item">
+                            <a class="page-link" href="/inicio/${paginaActual + 1}" aria-label="Siguiente">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Siguiente</span>
+                            </a>
+                        </li>
+                    <#else>
+                        <li class="page-item disabled">
+                            <a class="page-link" href="/inicio/${paginaActual + 1}" aria-label="Siguiente">
+                                <span aria-hidden="true">&raquo;</span>
+                                <span class="sr-only">Siguiente</span>
+                            </a>
+                        </li>
+                    </#if>
+                </ul>
+            </nav>
+        </div>
+    </div>
 </@base.pagina>
