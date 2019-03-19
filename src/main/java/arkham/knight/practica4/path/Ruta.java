@@ -211,6 +211,8 @@ public class Ruta {
 
             int pagina = Integer.parseInt(req.params("pagina"));
 
+            //aqui trabajo con la paginacion de los articulo
+
             articulos = ArticuloService.getInstancia().buscarArticulosPaginados(pagina, 5);
             double cantidadPaginas = ArticuloService.getInstancia().conseguirCantidadPaginas();
 
@@ -548,7 +550,7 @@ public class Ruta {
             });
         });
 
-
+        // filtrado de articulo por etiquetas
         get("/etiqueta/:id", (req, res) -> {
             StringWriter writer = new StringWriter();
             Map<String, Object> atributos = new HashMap<>();
